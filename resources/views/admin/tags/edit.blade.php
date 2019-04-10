@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="col-lg-8">
+<div class="col">
     @include('admin.includes.errors')
-    <div class="card">
+    <div class="card shadow">
         <div class="card-header">
-            Edit Category: {{$tag->name}}
+            Edit Tag: {{$tag->tag}}
         </div>
         <div class="card-body">
             <form action="{{ route('tag.update', ['id' => $tag->id]) }}" method="post">

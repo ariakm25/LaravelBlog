@@ -28,13 +28,14 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tags::all();
 
-        if($categories->count() == 0){
-            Session::flash('info', 'You must have some category before create a post.');
+        if($categories->count() == 0 || $tags->count() == 0){
+            Session::flash('info', 'You must have some categories and tags before create a post.');
             return redirect()->route('home');
         }
 
-        return view('admin.posts.create')->with('categories', $categories)->with('tags', Tag::all());
+        return view('admin.posts.create')->with('categories', $categories)->with('tags', $tags);
     }
 
     /**
@@ -50,7 +51,9 @@ class PostsController extends Controller
             'featured'      => 'required|image',
             'content'       => 'required',
             'category_id'   => 'required',
-            'tags'          => 'required'
+            'tags'          => 'required',
+            'keyword'       => 'required',
+            'description'   => 'required'
         ]);
 
         $featured = $request->featured;
@@ -62,6 +65,8 @@ class PostsController extends Controller
             'slug'          => str_slug($request->title),
             'category_id'   => $request->category_id,
             'content'       => $request->content,
+            'description'   => $request->description,
+            'keyword'       => $request->keyword,
             'featured'      => 'uploads/images/'. $featured_new_name
         ]);
 
@@ -110,7 +115,9 @@ class PostsController extends Controller
         $this->validate($request, [
             'title'         => 'required',
             'content'       => 'required',
-            'category_id'   => 'required'
+            'category_id'   => 'required',
+            'keyword'       => 'required',
+            'description'   => 'required',
             ]);
             
         $post = Post::find($id);
@@ -123,9 +130,11 @@ class PostsController extends Controller
             $post->featured = 'uploads/images/'.$featured_new_name;
         }
 
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->category_id = $request->category_id;
+        $post->title        = $request->title;
+        $post->content      = $request->content;
+        $post->category_id  = $request->category_id;
+        $post->description  = $request->description;
+        $post->keyword      = $request->keyword;
 
         $post->save();
 

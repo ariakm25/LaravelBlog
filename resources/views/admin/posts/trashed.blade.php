@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="col-lg-8">
-    <div class="card">
+<div class="col">
+    <div class="card shadow">
         <div class="card-header">
             Trash List
         </div>

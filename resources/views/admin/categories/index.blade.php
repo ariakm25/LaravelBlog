@@ -1,14 +1,23 @@
-@extends('layouts.app')
-
+@extends('layouts.admin')
+@section('style')
+<link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+@stop
 @section('content')
-<div class="col-lg-8">
-    <div class="card">
+<div class="col">
+    <div class="card shadow">
         <div class="card-header">
-            Categories List
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="mb-0">All Categories</h3>
+                </div>
+                <div class="col text-right">
+                    <a href="{{route('category.create')}}" class="btn btn-sm btn-primary">Create New Category</a>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-hover">
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th scope="col">Category Name</th>
                         <th class="text-center" scope="col">Edit</th>
@@ -45,6 +54,9 @@
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 @if(Session::has('success'))
     <script>
+    toastr.options = {
+        "positionClass": "toast-top-left",
+    }
         toastr.success("{{Session::get('success')}}")
     </script>
 @endif

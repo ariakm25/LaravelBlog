@@ -108,7 +108,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         'uses'  => 'TagsController@store',
         'as'    => 'tag.store'
     ]);
-    Route::get('/tag', [
+    Route::get('/tags', [
         'uses'  => 'TagsController@index',
         'as'    => 'tags'
     ]);
@@ -126,5 +126,45 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::get('/tag/delete/{id}', [
         'uses'  => 'TagsController@destroy',
         'as'    => 'tag.delete'
+    ]);
+
+    //Users Section
+    Route::get('/user/create', [
+        'uses'  => 'UsersController@create',
+        'as'    => 'user.create'
+    ]);
+
+    Route::post('/user/store', [
+        'uses'  => 'UsersController@store',
+        'as'    => 'user.store'
+    ]);
+    Route::get('/users', [
+        'uses'  => 'UsersController@index',
+        'as'    => 'users'
+    ]);
+
+    Route::get('/user/edit/{id}', [
+        'uses'  => 'UsersController@edit',
+        'as'    => 'user.edit'
+    ]);
+
+    Route::post('/user/edit/{id}', [
+        'uses'  => 'UsersController@update',
+        'as'    => 'user.update'
+    ]);
+
+    Route::get('/user/delete/{id}', [
+        'uses'  => 'UsersController@destroy',
+        'as'    => 'user.delete'
+    ]);
+
+    //Profiles Section
+    Route::get('/user/profile', [
+        'uses'  => 'ProfilesController@edit',
+        'as'    => 'profile.edit'
+    ]);
+    Route::post('/user/profile/update', [
+        'uses'  => 'ProfilesController@update',
+        'as'    => 'profile.update'
     ]);
 });

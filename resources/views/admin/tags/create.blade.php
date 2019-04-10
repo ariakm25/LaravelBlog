@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="col-lg-8">
+<div class="col">
     @include('admin.includes.errors')
-    <div class="card">
+    <div class="card shadow">
         <div class="card-header">
             Create New Tag
         </div>

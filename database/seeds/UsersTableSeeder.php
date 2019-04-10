@@ -19,10 +19,10 @@ class UsersTableSeeder extends Seeder
 
         App\Profile::create([
             'user_id'   => $user->id,
-            'avatar'    => 'uploads/avatars/ariakm25.png',
+            'avatar'    => 'uploads/avatars/default.png',
             'about'     => 'Just a Hooman',
             'facebook'  => 'https://facebook.com/ariakm25',
-            'website'   =>  'https:://ariakm.jp/'
+            'website'   =>  'https://ariakm.jp/'
         ]);
     }
 }
