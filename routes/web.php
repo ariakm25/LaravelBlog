@@ -167,4 +167,66 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         'uses'  => 'ProfilesController@update',
         'as'    => 'profile.update'
     ]);
+
+    //CategoryApp Section
+    Route::get('/app/category/create', [
+        'uses'  => 'CategoryAppsController@create',
+        'as'    => 'categoryApp.create'
+    ]);
+
+    Route::post('/app/category/store', [
+        'uses'  => 'CategoryAppsController@store',
+        'as'    => 'categoryApp.store'
+    ]);
+    Route::get('/app/categories', [
+        'uses'  => 'CategoryAppsController@index',
+        'as'    => 'categoryApps'
+    ]);
+
+    Route::get('/app/category/edit/{id}', [
+        'uses'  => 'CategoryAppsController@edit',
+        'as'    => 'categoryApp.edit'
+    ]);
+
+    Route::post('/app/category/edit/{id}', [
+        'uses'  => 'CategoryAppsController@update',
+        'as'    => 'categoryApp.update'
+    ]);
+
+    Route::get('/app/category/delete/{id}', [
+        'uses'  => 'CategoryAppsController@destroy',
+        'as'    => 'categoryApp.delete'
+    ]);
+
+    //Posts Section
+    Route::get('/app/create', [
+        'uses'  => 'AppsController@create',
+        'as'    => 'app.create'
+    ]);
+    
+    Route::post('/app/store', [
+        'uses'  => 'AppsController@store',
+        'as'    => 'app.store'
+    ]);    
+
+    Route::get('/apps', [
+        'uses'  => 'AppsController@index',
+        'as'    => 'apps.index'
+    ]);
+
+    Route::get('/app/edit/{id}', [
+        'uses'  => 'AppsController@edit',
+        'as'    => 'app.edit'
+    ]);
+
+    Route::post('/app/update/{id}', [
+        'uses'  => 'AppsController@update',
+        'as'    => 'app.update'
+    ]);
+
+    Route::get('/app/delete/{id}', [
+        'uses'  => 'AppsController@destroy',
+        'as'    => 'app.delete'
+    ]);
+
 });

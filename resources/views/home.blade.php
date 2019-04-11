@@ -100,7 +100,7 @@
             </div>
             @endif
 
-            Okaerinasai, Onii-san!
+            Welcome Back!
         </div>
     </div>
 </div>

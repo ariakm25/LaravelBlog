@@ -8,10 +8,10 @@
         <div class="card-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">All Posts</h3>
+                    <h3 class="mb-0">All Apps</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{route('post.create')}}" class="btn btn-sm btn-primary">Create New Post</a>
+                    <a href="{{route('app.create')}}" class="btn btn-sm btn-primary">Create New App</a>
                 </div>
             </div>
         </div>
@@ -27,23 +27,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if( count($posts) > 0 )
-                        @foreach($posts as $post)
+                    @if( count($apps) > 0 )
+                        @foreach($apps as $app)
                             <tr>
-                                <td><img width="150px" height="100px" src="{{$post->featured}}"></td>
-                                <td style="vertical-align: middle;">{{ $post->title }}</td>
-                                <td style="vertical-align: middle;" class="text-center">{{$post->category->name}}</td>
+                                <td>
+                                <div class="avatar rounded-circle mr-3">
+                                    <img src="{{asset($app->featured)}}">
+                                </div>
+                                </td>
+                                <td style="vertical-align: middle;">{{ $app->title }}</td>
                                 <td style="vertical-align: middle;" class="text-center">
-                                    <a href="{{route('post.edit', ['id' => $post->id])}}" class="btn btn-info btn-sm">Edit</a>
+                                    {{$app->category_app->name}}
                                 </td>
                                 <td style="vertical-align: middle;" class="text-center">
-                                    <a href="{{route('post.delete', ['id' => $post->id])}}" class="btn btn-danger btn-sm">Trash</a>
+                                    <a href="{{route('app.edit', ['id' => $app->id])}}" class="btn btn-info btn-sm">Edit</a>
+                                </td>
+                                <td style="vertical-align: middle;" class="text-center">
+                                    <a href="{{route('app.delete', ['id' => $app->id])}}" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
                     @else   
                         <tr>
-                            <td colspan="5" class="text-center">No Post Available</td>
+                            <td colspan="5" class="text-center">No Apps Available</td>
                         </tr>
                     @endif
                 </tbody>

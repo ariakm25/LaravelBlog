@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
+use App\CategoryApp;
 use Session;
 
-class CategoriesController extends Controller
+class CategoryAppsController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('/admin/categories/index')->with('categories', Category::orderBy('id','DESC')->get());
+        return view('admin.categoryApps.index')->with('categories', CategoryApp::orderBy('id','DESC')->get());
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.categoryApps.create');
     }
 
     /**
@@ -40,13 +40,13 @@ class CategoriesController extends Controller
             'name' => 'required'
         ]);
 
-        $category = new Category;
+        $category = new CategoryApp;
         $category->name = $request->name;
         $category->save();
         
         Session::flash('success', 'Success');
 
-        return redirect()->route('categories');
+        return redirect()->route('categoryApps');
     }
 
     /**
@@ -68,9 +68,9 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = CategoryApp::find($id);
 
-        return view('admin.categories.edit')->with('category', $category);
+        return view('admin.categoryApps.edit')->with('category', $category);
     }
 
     /**
@@ -82,13 +82,13 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
+        $category = CategoryApp::find($id);
         $category->name = $request->name;
         $category->save();
 
         Session::flash('success', 'Success');
 
-        return redirect()->route('categories');
+        return redirect()->route('categoryApps');
     }
 
     /**
@@ -99,8 +99,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        
+        $category = CategoryApp::find($id);
+
         if($category->posts)
         {
             foreach($category->posts as $post)
@@ -113,6 +113,6 @@ class CategoriesController extends Controller
 
         Session::flash('success', 'Success');
 
-        return redirect()->route('categories');
+        return redirect()->route('categoryApps');
     }
 }

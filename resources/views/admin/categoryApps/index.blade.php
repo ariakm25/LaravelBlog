@@ -8,10 +8,10 @@
         <div class="card-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="mb-0">All Posts</h3>
+                    <h3 class="mb-0">All Categories Apps</h3>
                 </div>
                 <div class="col text-right">
-                    <a href="{{route('post.create')}}" class="btn btn-sm btn-primary">Create New Post</a>
+                    <a href="{{route('categoryApp.create')}}" class="btn btn-sm btn-primary">Create New Category App</a>
                 </div>
             </div>
         </div>
@@ -19,31 +19,27 @@
             <table class="table table-hover">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Cover</th>
-                        <th scope="col">Title</th>
-                        <th class="text-center" scope="col">Category</th>
+                        <th scope="col">Category Name</th>
                         <th class="text-center" scope="col">Edit</th>
                         <th class="text-center" scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if( count($posts) > 0 )
-                        @foreach($posts as $post)
+                    @if(count($categories) > 0)    
+                        @foreach($categories as $category)
                             <tr>
-                                <td><img width="150px" height="100px" src="{{$post->featured}}"></td>
-                                <td style="vertical-align: middle;">{{ $post->title }}</td>
-                                <td style="vertical-align: middle;" class="text-center">{{$post->category->name}}</td>
-                                <td style="vertical-align: middle;" class="text-center">
-                                    <a href="{{route('post.edit', ['id' => $post->id])}}" class="btn btn-info btn-sm">Edit</a>
+                                <td>{{ $category->name }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('categoryApp.edit', ['id' => $category->id]) }}" class="btn btn-info btn-sm">Edit</a>
                                 </td>
-                                <td style="vertical-align: middle;" class="text-center">
-                                    <a href="{{route('post.delete', ['id' => $post->id])}}" class="btn btn-danger btn-sm">Trash</a>
+                                <td class="text-center">
+                                    <a href="{{ route('categoryApp.delete', ['id' => $category->id]) }}" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
-                    @else   
+                    @else
                         <tr>
-                            <td colspan="5" class="text-center">No Post Available</td>
+                            <td colspan="4" class="text-center">No Categories Available</td>
                         </tr>
                     @endif
                 </tbody>
@@ -58,9 +54,9 @@
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 @if(Session::has('success'))
     <script>
-        toastr.options = {
-            "positionClass": "toast-top-left",
-        }
+    toastr.options = {
+        "positionClass": "toast-top-left",
+    }
         toastr.success("{{Session::get('success')}}")
     </script>
 @endif
