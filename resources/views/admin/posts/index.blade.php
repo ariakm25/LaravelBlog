@@ -49,6 +49,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer py-4">
+            {{ $posts->links() }}
+        </div>
     </div>
 </div>
 @stop

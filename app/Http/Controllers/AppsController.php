@@ -16,7 +16,7 @@ class AppsController extends Controller
      */
     public function index()
     {
-        return view('admin.apps.index')->with('apps', App::orderBy('id', 'DESC')->get());
+        return view('admin.apps.index')->with('apps', App::orderBy('id', 'DESC')->paginate(20));
     }
 
     /**

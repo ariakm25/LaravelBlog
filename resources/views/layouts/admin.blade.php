@@ -182,7 +182,7 @@
             </div>
         </div>
         <!-- Page content -->
-        <div class="container-fluid mt--7">
+        <div class="container-fluid mt--7 mb-7">
             @yield('content')
         </div>
     </div>

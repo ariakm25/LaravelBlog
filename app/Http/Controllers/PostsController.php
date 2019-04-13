@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index')->with('posts', Post::orderBy('id', 'DESC')->get());
+        return view('admin.posts.index')->with('posts', Post::orderBy('id', 'DESC')->paginate(20));
     }
 
     /**
@@ -59,6 +59,26 @@ class PostsController extends Controller
         $featured = $request->featured;
         $featured_new_name = time().'_'.$featured->getClientOriginalName();
         $featured->move('uploads/images', $featured_new_name);
+        
+        $exitingTags = Tag::all()->pluck('tag')->toArray();
+
+        $newTags = explode(',', $request->tags);
+
+        //find new tag
+        foreach($newTags as $tag) {
+            if(! ( in_array($tag, $exitingTags) ) ) {
+                //create a new tag
+                $newTag = new Tag;
+                $newTag->tag = $tag;
+                $newTag->save();
+            }
+        }
+
+        $attachableTags = [];
+
+        foreach($newTags as $tag) {
+            $attachableTags[] = Tag::where('tag', $tag)->pluck('id')->first();
+        }
 
         $post = Post::create([
             'title'         => $request->title,
@@ -70,7 +90,8 @@ class PostsController extends Controller
             'featured'      => 'uploads/images/'. $featured_new_name
         ]);
 
-        $post->tags()->attach($request->tags);
+
+        $post->tags()->sync($attachableTags);
 
         Session::flash('success', 'Success Creating Post');
 
@@ -137,8 +158,28 @@ class PostsController extends Controller
         $post->keyword      = $request->keyword;
 
         $post->save();
+        
+        $exitingTags = Tag::all()->pluck('tag')->toArray();
 
-        $post->tags()->sync($request->tags);
+        $newTags = explode(',', $request->tags);
+
+        //find new tag
+        foreach($newTags as $tag) {
+            if(! ( in_array($tag, $exitingTags) ) ) {
+                //create a new tag
+                $newTag = new Tag;
+                $newTag->tag = $tag;
+                $newTag->save();
+            }
+        }
+
+        $attachableTags = [];
+
+        foreach($newTags as $tag) {
+            $attachableTags[] = Tag::where('tag', $tag)->pluck('id')->first();
+        }
+
+        $post->tags()->sync($attachableTags);
 
         Session::flash('success','Post updated successfully');
         

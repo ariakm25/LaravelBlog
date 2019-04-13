@@ -32,18 +32,16 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="tags">Tags</label>
-                    <div class="checkbox">
-                        @foreach($tags as $tag)
-                            <label><input type="checkbox" name="tags[]" value="{{$tag->id}}"
-                            @foreach($posts->tags as $t)
-                                @if($tag->id == $t->id)
-                                    checked
-                                @endif
-                            @endforeach
-                            > {{$tag->tag}}</label>
-                        @endforeach
-                    </div>    
+                    <label for="tags">Tags <small>(Separated with comma ( , )</small></label>
+                    @php
+                        $tags = [];
+                        foreach($posts->tags as $tag) 
+                        {
+                            $tags[] = $tag->tag;
+                        }
+                        $tag = implode(",", $tags);
+                    @endphp
+                        <input type="text" name="tags" class="form-control" value="{{$tag}}">
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>

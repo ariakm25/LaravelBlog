@@ -12,7 +12,7 @@
             {{ csrf_field() }}
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" name="title" class="form-control">
+                    <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                 </div>
                 <div class="form-group">
                     <label for="featured">Featured Image</label>
@@ -27,24 +27,20 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="tags">Tags</label>
-                    <div class="checkbox">
-                        @foreach($tags as $tag)
-                            <label><input type="checkbox" name="tags[]" value="{{$tag->id}}"> {{$tag->tag}}</label>
-                        @endforeach
-                    </div>    
+                    <label for="tags">Tags <small>(Separated with comma ( , )</small></label>
+                    <input type="text" name="tags" class="form-control" value="{{ old('tags') }}">
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea name="content" id="content" class="form-control" cols="5" rows="5"></textarea>
+                    <textarea name="content" id="content" class="form-control" cols="5" rows="5">{{ old('content') }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" class="form-control" cols="5" rows="5"></textarea>
+                    <textarea name="description" id="description" class="form-control" cols="5" rows="5">{{ old('description') }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="keyword">Keyword</label>
-                    <textarea name="keyword" id="keyword" class="form-control" cols="5" rows="5"></textarea>
+                    <textarea name="keyword" id="keyword" class="form-control" cols="5" rows="5">{{ old('keyword') }}</textarea>
                 </div>
                 <div class="form-group">
                     <div class="text-center">

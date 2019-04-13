@@ -11,12 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
+Auth::routes(['verify' => true, 'register' => false]);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
@@ -230,3 +225,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     ]);
 
 });
+
+//Frontend Section
+Route::get('/', [
+    'uses'  => 'FrontendController@index',
+    'as'    => 'index'
+]);
+Route::get('/post/{id}', [
+    'uses'  => 'FrontendController@single',
+    'as'    => 'post.single'
+]);
+Route::get('/app/{id}', [
+    'uses'  => 'FrontendController@single_app',
+    'as'    => 'app.single'
+]);
